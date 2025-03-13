@@ -1,17 +1,20 @@
-from botasaurus.browser import browser, Driver
+from botasaurus.request import request, Request
+from botasaurus.soupify import soupify
 
-@browser
-def scrape_heading_task(driver: Driver, data):
+@request
+def scrape_heading_task(request: Request, data):
     # Visit the Omkar Cloud website
-    driver.get("https://www.omkar.cloud/")
+    response = request.get("https://www.omkar.cloud/")
+
+    # Create a BeautifulSoup object    
+    soup = soupify(response)
     
     # Retrieve the heading element's text
-    heading = driver.get_text("h1")
+    heading = soup.find('h1').get_text()
 
     # Save the data as a JSON file in output/scrape_heading_task.json
     return {
         "heading": heading
-    }
-     
+    }     
 # Initiate the web scraping task
 scrape_heading_task()
