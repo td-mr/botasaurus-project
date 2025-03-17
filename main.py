@@ -18,3 +18,4 @@ def scrape_heading_task(request: Request, data):
     }     
 # Initiate the web scraping task
 scrape_heading_task()
+
