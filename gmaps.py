@@ -1,10 +1,12 @@
-@browser(
-    data=["rechtsanwalt in muenster it-recht"],
-)
+from botasaurus.browser import browser, Driver
+from botasaurus import *
+
+@browser()
 def scrape_places_links(driver: AntiDetectDriver, query):
 
     # Visit Google Maps
     def visit_google_maps():
+        query = "rechtsanwalt in muenster it-recht"
         encoded_query = urllib.parse.quote_plus(query)
         url = f'https://www.google.com/maps/search/{encoded_query}'
         driver.get(url)
@@ -57,3 +59,4 @@ def scrape_places_links(driver: AntiDetectDriver, query):
             "rating": rating,
             "link": link,
         }
+scrape_places_links()    
